@@ -8,6 +8,9 @@ database         = os.environ.get('DATABASE')
 db_user_id       = os.environ.get('DB_USERNAME')
 db_user_password = os.environ.get('DB_PASSWORD')
 
+
+print(f'sqllite3.connect({db_server}:{db_port}/{database}, {db_user_id}, {db_user_password})
+
 # 데이터베이스 연결
 conn             = sqlite3.connect(f'{db_server}:{db_port}/{database}', db_user_id, db_user_password)
 
