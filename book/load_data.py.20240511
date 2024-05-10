@@ -1,4 +1,4 @@
-import mysql.connector
+import sqlite3
 import os
 
 # 환경 변수에서 데이터베이스 연결 정보 읽어오기
@@ -11,27 +11,22 @@ db_user_password = os.environ.get('DB_PASSWORD')
 db_user_id       = db_user_id.strip( )
 db_user_password = db_user_password.strip( )
 
-print(f'conn = mysql.connector.connect(host={db_server},\nport={db_port},\ndatabase={database},\nuser={db_user_id},\npasword= {db_user_password}')
 
-# MySQL 연결 설정
-conn = mysql.connector.connect(
-    host=db_server,
-    port=db_port,
-    user=db_user_id,
-    password=db_user_password,
-    database=database
-)
+print(f'sqllite3.connect({db_server}:{db_port}/{database}, {db_user_id}, {db_user_password}')
+
+# 데이터베이스 연결
+conn             = sqlite3.connect(f'{db_server}:{db_port}/{database}', db_user_id, db_user_password)
 
 # 커서 생성
-cursor = conn.cursor()
+cursor = conn.cursor( )
 
 # SQL 파일 읽기
-sql_file = open('load_data.sql', 'r')
-sql_script = sql_file.read()
+sql_file   = open('tutorial_book.sql', 'r')
+sql_script = sql_file.read( )
 sql_file.close()
 
 # SQL 스크립트 실행
-cursor.execute(sql_script)
+cursor.executescript(sql_script)
 
 # 변경사항 커밋
 conn.commit()
