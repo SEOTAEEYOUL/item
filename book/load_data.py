@@ -37,5 +37,17 @@ cursor.execute(sql_script, multi=True)
 # 변경사항 커밋
 conn.commit()
 
+# Books 테이블 조회
+cursor.execute("SELECT * FROM Books")
+result = cursor.fetchall()
+for row in result:
+    print(row)
+
+# 건수 조회
+cursor.execute("SELECT COUNT(*) FROM Books")
+count = cursor.fetchone()[0]
+print("Total records in Books table:", count)
+
+
 # 연결 종료
 conn.close()
