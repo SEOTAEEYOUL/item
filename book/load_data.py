@@ -2,11 +2,13 @@ import sqlite3
 import os
 
 # 환경 변수에서 데이터베이스 연결 정보 읽어오기
-db_server        = os.environ.get('DB_SERVER').strip( )
-db_port          = os.environ.get('DB_PORT').strip( )
-database         = os.environ.get('DATABASE').strip( )
-db_user_id       = os.environ.get('DB_USERNAME').strip( )
-db_user_password = os.environ.get('DB_PASSWORD').strip( )
+db_server        = os.environ.get('DB_SERVER')
+db_port          = os.environ.get('DB_PORT')
+database         = os.environ.get('DATABASE')
+db_user_id       = os.environ.get('DB_USERNAME')
+db_user_password = os.environ.get('DB_PASSWORD')
+
+db_user_id       = db_user_id.strip( )
 
 
 print(f'sqllite3.connect({db_server}:{db_port}/{database}, {db_user_id}, {db_user_password}')
