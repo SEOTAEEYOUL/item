@@ -35,7 +35,7 @@ try:
         sql_script = file.read()
     # sql_file = open('tutorial_book.sql', 'r')
     # sql_script = sql_file.read()
-    sql_file.close()
+    # sql_file.close()
 
     # SQL 스크립트 실행
     # multi=True : 다중 쿼리를 실행 
