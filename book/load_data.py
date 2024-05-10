@@ -13,52 +13,66 @@ db_user_password = db_user_password.strip( )
 
 print(f'conn = mysql.connector.connect(host={db_server},\nport={db_port},\ndatabase={database},\nuser={db_user_id},\npasword= {db_user_password}')
 
-# MySQL 연결 설정
-conn = mysql.connector.connect(
-    host=db_server,
-    port=db_port,
-    user=db_user_id,
-    password=db_user_password,
-    database=database
-)
 
-# 커서 생성
-cursor = conn.cursor()
+# init_data.sql 파일 경로
+sql_file = "init_data.sql"
 
-# SQL 파일 읽기
-sql_file = open('tutorial_book.sql', 'r')
-sql_script = sql_file.read()
-sql_file.close()
+try:
+    # MySQL 연결 설정
+    conn = mysql.connector.connect(
+        host=db_server,
+        port=db_port,
+        user=db_user_id,
+        password=db_user_password,
+        database=database
+    )
 
-# SQL 스크립트 실행
-# multi=True : 다중 쿼리를 실행 
-cursor.execute(sql_script, multi=True)
+    # 커서 생성
+    cursor = conn.cursor()
 
-# 변경사항 커밋
-conn.commit()
+    # SQL 파일 읽기
+    with open(sql_file, 'r') as file:
+        sql_script = file.read()
+    # sql_file = open('tutorial_book.sql', 'r')
+    # sql_script = sql_file.read()
+    sql_file.close()
 
-# 테이블 스키마 조회
-print("0. 테이블(Books) 스키마 조회")
-cursor.execute("DESCRIBE Books")
-schema = cursor.fetchall()
-print("Books table schema:")
-for column in schema:
-    print(column[0], column[1], column[2])
+    # SQL 스크립트 실행
+    # multi=True : 다중 쿼리를 실행 
+    cursor.execute(sql_script, multi=True)
 
-# Books 테이블 조회
-print("1. 테이블 내용 조회")
-cursor.execute("SELECT * FROM Books")
-result = cursor.fetchall()
-for row in result:
-    print(row)
+    # 변경사항 커밋
+    conn.commit()
+    print("Data inserted successfully")
 
-# 건수 조회
-print("2. 건수 조회")
-cursor.execute("SELECT COUNT(*) FROM Books")
-count = cursor.fetchone()[0]
-print("Total records in Books table:", count)
+    # 테이블 스키마 조회
+    print("0. 테이블(Books) 스키마 조회")
+    cursor.execute("DESCRIBE Books")
+    schema = cursor.fetchall()
+    print("Books table schema:")
+    for column in schema:
+        print(column[0], column[1], column[2])
 
+    # Books 테이블 조회
+    print("1. 테이블 내용 조회")
+    cursor.execute("SELECT * FROM Books")
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
 
-# 연결 종료
-print("9. 연결종료")
-conn.close()
+    # 건수 조회
+    print("2. 건수 조회")
+    cursor.execute("SELECT COUNT(*) FROM Books")
+    count = cursor.fetchone()[0]
+    print("Total records in Books table:", count)
+
+except mysql.connector.Error as e:
+    print(f"Error: {e}")
+
+finally:
+    # 연결 종료
+    print("9. 연결종료")
+    if conn.is_connected():
+        cursor.close()
+        conn.close()
+        print("Connection closed")
