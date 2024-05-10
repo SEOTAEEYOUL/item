@@ -15,7 +15,7 @@ print(f'conn = mysql.connector.connect(host={db_server},\nport={db_port},\ndatab
 
 
 # init_data.sql 파일 경로
-sql_file = "init_data.sql"
+sql_file = "tutorial_book.sql"
 
 try:
     # MySQL 연결 설정
