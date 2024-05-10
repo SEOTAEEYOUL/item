@@ -9,6 +9,7 @@ db_user_id       = os.environ.get('DB_USERNAME')
 db_user_password = os.environ.get('DB_PASSWORD')
 
 db_user_id       = db_user_id.strip( )
+db_user_password = db_user_password.strip( )
 
 
 print(f'sqllite3.connect({db_server}:{db_port}/{database}, {db_user_id}, {db_user_password}')
