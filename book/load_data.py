@@ -37,6 +37,14 @@ cursor.execute(sql_script, multi=True)
 # 변경사항 커밋
 conn.commit()
 
+# 테이블 스키마 조회
+print("테이블 스키마 조회")
+cursor.execute("DESCRIBE Books")
+schema = cursor.fetchall()
+print("Books table schema:")
+for column in schema:
+    print(column[0], column[1], column[2])
+
 # Books 테이블 조회
 cursor.execute("SELECT * FROM Books")
 result = cursor.fetchall()
