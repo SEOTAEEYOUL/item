@@ -26,7 +26,7 @@ conn = mysql.connector.connect(
 cursor = conn.cursor()
 
 # SQL 파일 읽기
-sql_file = open('load_data.sql', 'r')
+sql_file = open('tutorial_book.sql', 'r')
 sql_script = sql_file.read()
 sql_file.close()
 
