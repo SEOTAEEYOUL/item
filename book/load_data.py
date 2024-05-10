@@ -31,7 +31,7 @@ sql_script = sql_file.read()
 sql_file.close()
 
 # SQL 스크립트 실행
-cursor.execute(sql_script)
+cursor.execute(sql_script, multi=True)
 
 # 변경사항 커밋
 conn.commit()
