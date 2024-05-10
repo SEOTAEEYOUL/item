@@ -4,7 +4,7 @@ import os
 # 환경 변수에서 데이터베이스 연결 정보 읽어오기
 db_server        = os.environ.get('DB_SERVER')
 db_port          = os.environ.get('DB_PORT')
-database         = os.environ('DATABASE')
+database         = os.environ.get('DATABASE')
 db_user_id       = os.environ.get('DB_USERNAME')
 db_user_password = os.environ.get('DB_PASSWORD')
 
