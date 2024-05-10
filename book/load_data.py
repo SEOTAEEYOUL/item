@@ -39,8 +39,14 @@ try:
 
     # SQL 스크립트 실행
     # multi=True : 다중 쿼리를 실행 
-    # cursor.execute(sql_script, multi=True)
-    cursor.execute(sql_script)
+    cursor.execute(sql_script, multi=True)
+
+
+    print("***(*). 테이블 내용 조회")
+    cursor.execute("SELECT * FROM Books")
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
 
     # 변경사항 커밋
     conn.commit()
