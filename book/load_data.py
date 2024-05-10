@@ -38,7 +38,7 @@ cursor.execute(sql_script, multi=True)
 conn.commit()
 
 # 테이블 스키마 조회
-print("테이블 스키마 조회")
+print("0. 테이블(Books) 스키마 조회")
 cursor.execute("DESCRIBE Books")
 schema = cursor.fetchall()
 print("Books table schema:")
@@ -46,16 +46,19 @@ for column in schema:
     print(column[0], column[1], column[2])
 
 # Books 테이블 조회
+print("1. 테이블 내용 조회")
 cursor.execute("SELECT * FROM Books")
 result = cursor.fetchall()
 for row in result:
     print(row)
 
 # 건수 조회
+print("2. 건수 조회")
 cursor.execute("SELECT COUNT(*) FROM Books")
 count = cursor.fetchone()[0]
 print("Total records in Books table:", count)
 
 
 # 연결 종료
+print("9. 연결종료")
 conn.close()
