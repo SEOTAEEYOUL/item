@@ -1,16 +1,16 @@
-DROP TABLE IF EXISTS `Books`;
+-- DROP TABLE IF EXISTS `Books`;
 
-CREATE TABLE IF NOT EXISTS tutorial.Books
-(
-  `seqno` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(20) NOT NULL,
-  `author` VARCHAR(20) NOT NULL,
-  `price` DOUBLE NOT NULL DEFAULT 0,
-  `published_date` DATE NOT NULL,
-  PRIMARY KEY(SeqNo)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+-- CREATE TABLE IF NOT EXISTS tutorial.Books
+-- (
+--   `seqno` INT NOT NULL AUTO_INCREMENT,
+--   `title` VARCHAR(20) NOT NULL,
+--   `author` VARCHAR(20) NOT NULL,
+--   `price` DOUBLE NOT NULL DEFAULT 0,
+--   `published_date` DATE NOT NULL,
+--   PRIMARY KEY(SeqNo)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
-LOCK TABLES `Books` WRITE;
+-- LOCK TABLES `Books` WRITE;
 insert into Books (title, author, price, published_date)
 values ('TCP/IP 완벽 가이드', '강유,김혁진,...', 45000, '2021-12-01');
 insert into Books (title, author, price, published_date)
@@ -26,4 +26,4 @@ insert into Books (title, author, price, published_date) values
  ('리액트 네이티브를 다루는 기술', '김민준', 43000, '2022-06-01'),
  ('핸즈온 머신러닝 2판', '오렐리앙 제롱', 55000, '2022-07-25'),
  ('자연어 처리 쿡북 with 파이썬', '크리슈나바브사 외', 30000, '2019-01-31');
-UNLOCK TABLES;
+-- UNLOCK TABLES;
