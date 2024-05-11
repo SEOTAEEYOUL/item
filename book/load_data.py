@@ -98,15 +98,14 @@ try:
     cursor = conn.cursor()
 
     print('# SQL 파일 읽기')
-    with open(sql_file, 'r') as file:
-        sql_script = file.read()
-    # sql_file = open('tutorial_book.sql', 'r')
-    # sql_script = sql_file.read()
-    # sql_file.close()
-
-    print('# SQL 스크립트 실행')
-    # multi=True : 다중 쿼리를 실행
-    cursor.execute(sql_script, multi=True)
+    # 파일에서 데이터 읽기 및 삽입
+    with open('books_data.txt', 'r') as file:
+        for line in file:
+            data = line.strip().split(', ')
+            title, author, price, published_date = data
+            price = int(price)
+            query = f"INSERT INTO Books (title, author, price, published_date) VALUES (%s, %s, %s, %s)"
+            cursor.execute(query, (title, author, price, published_date))
 
     print('# 변경사항 커밋')
     conn.commit( )
