@@ -70,8 +70,7 @@ try:
 
     print('# SQL 스크립트 실행')
     # multi=True : 다중 쿼리를 실행 
-    # cursor.execute(sql_script, multi=True)
-    cursor.executemany(sql_script)
+    cursor.execute(sql_script, multi=True)
 
     print('# 변경사항 커밋')
     conn.commit( )
@@ -93,7 +92,9 @@ try:
 
 except mysql.connector.Error as e:
     print(f"Error: {e}")
-
+except Exception as e:
+    conn.rollback( )
+    raise e
 finally:
     # 연결 종료
     print("9. 연결종료")
