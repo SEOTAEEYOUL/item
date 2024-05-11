@@ -62,10 +62,10 @@ try:
     print("2. 건수 조회")
     cursor.execute("select COUNT(*) from Books")
     count = cursor.fetchone()[0]
-    print("Total records in Books table:", count)
+    print(f'Total records in Books table: {count}')
 
     # Books 테이블 조회
-    print(f'3. 테이블 내용 조회[count]')
+    print(f'3. 테이블 내용 조회[{count}]')
     cursor.execute("select * from Books")
     result = cursor.fetchall()
     for row in result:
