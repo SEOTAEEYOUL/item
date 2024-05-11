@@ -30,6 +30,19 @@ try:
     # 커서 생성
     cursor = conn.cursor()
 
+    # 테이블 스키마 조회
+    print("0. 테이블(Books) 스키마 조회")
+    cursor.execute("DESCRIBE Books")
+    schema = cursor.fetchall()
+    print("Books table schema:")
+    for column in schema:
+        print(column[0], column[1], column[2])
+
+    # Books 테이블의 내용을 지우는 코드 추가
+    print("1. 테이블 내용 삭제")
+    cursor.execute("DELETE FROM Books")
+    print("All records deleted from Books table")
+
     # SQL 파일 읽기
     with open(sql_file, 'r') as file:
         sql_script = file.read()
@@ -52,26 +65,19 @@ try:
     conn.commit()
     print("Data inserted successfully")
 
-    # 테이블 스키마 조회
-    print("0. 테이블(Books) 스키마 조회")
-    cursor.execute("DESCRIBE Books")
-    schema = cursor.fetchall()
-    print("Books table schema:")
-    for column in schema:
-        print(column[0], column[1], column[2])
-
-    # Books 테이블 조회
-    print("1. 테이블 내용 조회")
-    cursor.execute("SELECT * FROM Books")
-    result = cursor.fetchall()
-    for row in result:
-        print(row)
-
     # 건수 조회
     print("2. 건수 조회")
     cursor.execute("SELECT COUNT(*) FROM Books")
     count = cursor.fetchone()[0]
     print("Total records in Books table:", count)
+
+    # Books 테이블 조회
+    print(f"3. 테이블 내용 조회[$count]")
+    cursor.execute("SELECT * FROM Books")
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
 
 except mysql.connector.Error as e:
     print(f"Error: {e}")
