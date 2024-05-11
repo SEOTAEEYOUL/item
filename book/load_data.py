@@ -35,8 +35,37 @@ try:
     cursor.execute("DESCRIBE Books")
     schema = cursor.fetchall()
     print("   Books table schema:")
+    i = 0
+
+    # MySQL [tutorial]> describe Books ;
+    # +----------------+-------------+------+-----+---------+----------------+
+    # | Field          | Type        | Null | Key | Default | Extra          |
+    # +----------------+-------------+------+-----+---------+----------------+
+    # | seqno          | int         | NO   | PRI | NULL    | auto_increment |
+    # | title          | varchar(80) | NO   |     | NULL    |                |
+    # | author         | varchar(50) | NO   |     | NULL    |                |
+    # | price          | double      | NO   |     | 0       |                |
+    # | published_date | date        | NO   |     | NULL    |                |
+    # +----------------+-------------+------+-----+---------+----------------+
+    # 5 rows in set (0.001 sec)
+
+
+    print(f'    No Cloumn Name           Type                  Null  Key   Default  Extra')
     for column in schema:
-        print(column[0], column[1], column[2])
+        # i += 1
+        # print(f'0    {i:2} {column[0]:<20}  {column[1]:<20}  {column[2]:<5} {column[3]:<5} {column[4]:<8} {column[5]:<15}')
+        column3 =  ' '
+        column4 =  'NULL'
+        column5 =  ' '
+        if column[3] is not None:
+            column3 = column[3]
+        if column[4] is not None:
+            column4 = column[4]
+        if column[5] is not None:
+            column5 = column[5]
+
+        print(f'    {i+1:2} {column[0]:<20}  {column[1]:<20}  {column[2]:<5} {column3:<5} {column4:<8} {column5:<15}')
+
 
 
     # 건수 조회
@@ -69,7 +98,7 @@ try:
     # sql_file.close()
 
     print('# SQL 스크립트 실행')
-    # multi=True : 다중 쿼리를 실행 
+    # multi=True : 다중 쿼리를 실행
     cursor.execute(sql_script, multi=True)
 
     print('# 변경사항 커밋')
