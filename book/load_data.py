@@ -89,6 +89,13 @@ try:
     print('# 변경사항 커밋')
     conn.commit( )
     print("Data inserted successfully")
+    print('# Cursor Close')
+    cursor.close( )
+
+    print("")
+    print("-----------------------------")
+    print('# Cursor 신규 오픈')
+    cursor = conn.cursor()
 
     print('# SQL 파일 읽기')
     with open(sql_file, 'r') as file:
