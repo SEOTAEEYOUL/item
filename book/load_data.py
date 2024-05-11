@@ -38,6 +38,20 @@ try:
     for column in schema:
         print(column[0], column[1], column[2])
 
+
+    # 건수 조회
+    print("0. 건수 조회")
+    cursor.execute("select COUNT(*) from Books")
+    count = cursor.fetchone()[0]
+    print(f'Total records in Books table: {count}')
+
+    # Books 테이블 조회
+    print(f'0. 테이블 내용 조회[{count}]')
+    cursor.execute("select * from Books")
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
     # Books 테이블의 내용을 지우는 코드 추가
     print("1. Books 테이블 내용 삭제")
     cursor.execute("DELETE FROM Books")
