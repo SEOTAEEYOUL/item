@@ -89,13 +89,20 @@ try:
     print('# 변경사항 커밋')
     conn.commit( )
     print("Data inserted successfully")
-    print('# Cursor Close')
-    cursor.close( )
 
-    print("")
-    print("-----------------------------")
-    print('# Cursor 신규 오픈')
-    cursor = conn.cursor()
+
+    print('# seqno 리셋')
+    cursor.execute("alter table Books auto_increment = 1")
+
+    print('# 변경사항 커밋')
+    conn.commit()
+    # print('# Cursor Close')
+    # cursor.close( )
+
+    # print("")
+    # print("-----------------------------")
+    # print('# Cursor 신규 오픈')
+    # cursor = conn.cursor()
 
     print('# SQL 파일 읽기')
     # 파일에서 데이터 읽기 및 삽입
